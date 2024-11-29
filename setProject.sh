@@ -10,37 +10,40 @@ echo "Creando directorios..."
 mkdir -p $PROJECT_NAME/{.github/workflows,tests}
 
 # Crear el archivo principal con principios SOLID
-echo "Creando suma.py..."
-cat <<EOL > $PROJECT_NAME/suma.py
-def suma(a, b):
+echo "Creando fn_sum.py..."
+cat <<EOL > $PROJECT_NAME/fn_sum.py
+def sum_value(a, b):
     """
-    Devuelve la suma de dos números.
-    Principio de Responsabilidad Única (SRP): 
-    Esta función tiene una sola responsabilidad: sumar dos números.
+    Returns the sum of two numbers.
+    Single Responsibility Principle (SRP): 
+    This function has only one responsibility: to add two numbers.
     """
     return a + b
 EOL
 
 # Crear pruebas unitarias para suma
-echo "Creando tests/test_suma.py..."
-cat <<EOL > $PROJECT_NAME/tests/test_suma.py
+echo "Creando tests/test_sum.py..."
+cat <<EOL > $PROJECT_NAME/tests/test_sum.py
 import unittest
-from suma import suma
+from fn_sum import sum_value
 
-class TestSuma(unittest.TestCase):
+class TestSum(unittest.TestCase):
     """
-    Principio de Responsabilidad Única (SRP): 
-    Este archivo solo contiene pruebas para la función suma.
+    Single Responsibility Principle (SRP): 
+    This file only contains tests for the sum function.
     """
 
-    def test_suma_positivos(self):
-        self.assertEqual(suma(2, 3), 5)
+    def test_positive_numbers(self):
+        """ Test with positive numbers """
+        self.assertEqual(sum_value(2, 3), 5)
 
-    def test_suma_negativos(self):
-        self.assertEqual(suma(-2, -3), -5)
+    def test_negative_numbers(self):
+        """ Test with negative numbers """
+        self.assertEqual(sum_value(-2, -3), -5)
 
-    def test_suma_mixtos(self):
-        self.assertEqual(suma(-2, 3), 1)
+    def test_mixt_numbers(self):
+        """ Test with mixt numbers """
+        self.assertEqual(sum_value(-2, 3), 1)
 
 if __name__ == "__main__":
     unittest.main()
@@ -50,18 +53,21 @@ EOL
 echo "Creando tests/test_pytest.py..."
 cat <<EOL > $PROJECT_NAME/tests/test_pytest.py
 import pytest
-from suma import suma
+from fn_sum import sum_value
 
 def test_positive_numbers():
-    assert suma(7, 3) == 10
+    """ Test with positive numbers """
+    assert sum_value(7, 3) == 10
 
 # Test con números negativos
 def test_negative_numbers():
-    assert suma(-3, -4) == -7
+    """ Test with negative numbers """
+    assert sum_value(-3, -4) == -7
 
 
-def test_suma_mixtos():
-    assert suma(-7, 6) == 1
+def test_sum_mixt():
+    """ Test with mixt numbers """
+    assert sum_value(-7, 6) == 1
 EOL
 
 # Crear archivo de dependencias
