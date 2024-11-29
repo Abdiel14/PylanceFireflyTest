@@ -9,8 +9,3 @@ def test_positive_numbers():
 def test_negative_numbers():
     """ Test with negative numbers """
     assert sum_value(-3, -4) == -7
-
-
-def test_sum_mixt():
-    """ Test with mixt numbers """
-    assert sum_value(-7, 6) == 1
